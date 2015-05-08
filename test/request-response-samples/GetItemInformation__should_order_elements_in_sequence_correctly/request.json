@@ -1,0 +1,10 @@
+{
+	"Items": {
+		"Item": [{
+			"RequestedQuantity": {
+				"Value": "1.00"
+			},
+			"ItemNumber": "1234"
+		}]
+	}
+}
