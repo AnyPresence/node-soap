@@ -45,7 +45,7 @@
           <xs:element minOccurs="0" maxOccurs="1" name="ItemNumber" type="xs:string" />
           <xs:element minOccurs="1" maxOccurs="1" name="SupplierId" type="xs:short" />
           <xs:element minOccurs="0" maxOccurs="1" name="SupplierName" type="xs:string" />
-          <xs:element ref="QuantityElement" />
+          <xs:element ref="tns:RequestedQuantity" />
         </xs:sequence>
       </xs:complexType>
       <xs:complexType name="Quantity">
