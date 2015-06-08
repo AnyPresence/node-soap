@@ -1,8 +1,13 @@
 {
 	"Items": {
 		"Item": [{
+			"SupplierName": "Joe Supplier",
 			"RequestedQuantity": {
-				"Value": "1.00"
+				"AvailState": {
+					"AvailState": 1
+				},
+				"Value": "1.00",
+				"Description": "The description"
 			},
 			"ItemNumber": "1234"
 		}]
