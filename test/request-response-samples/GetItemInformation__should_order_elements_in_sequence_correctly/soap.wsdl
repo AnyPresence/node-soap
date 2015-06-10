@@ -17,13 +17,13 @@
   targetNamespace="SAMPLE" >
   <wsdl:types>
     <xs:schema elementFormDefault="qualified" targetNamespace="SAMPLE" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-      <xs:element name="GetItemInformation">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element minOccurs="0" maxOccurs="1" name="Items" type="tns:ArrayOfItem" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
+      <xs:element name="GetItemInformation" type="tns:GetItemInformationType" />
+      <xs:complexType name="GetItemInformationType">
+        <xs:sequence>
+          <xs:element ref="tns:Items" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element minOccurs="0" maxOccurs="1" name="Items" type="tns:ArrayOfItem" />
       <xs:element minOccurs="0" maxOccurs="1" name="RequestedQuantity" type="tns:Quantity" />
       <xs:complexType name="ArrayOfItem">
         <xs:sequence>
