@@ -1,0 +1,43 @@
+{
+  "DoStuffChores": {
+    "DoStuffTodoList": {
+      "completionStatus": {
+        "$value": "ACTIVE"
+      },
+      "changeAirFilter": {
+        "$value": "123"
+      },
+      "mopFloors": {
+        "$value": "654321"
+      },
+      "dust": {
+        "$value": "998877676"
+      },
+      "vacuumFloors": {
+        "$value": "1234"
+      },
+      "sweepPatio": {
+        "attributes": {
+          "favorite": "1"
+        },
+        "$value": "12121212"
+      },
+      "cleanGutters": {
+        "$value": "ABC124"
+      },
+      "mowLawn": {
+        "$value": "ABC123"
+      },
+      "laundry": {
+        "$value": "9988776655443322"
+      },
+      "attributes": {
+        "action": "Update"
+      }
+    }
+  },
+  "attributes": {
+    "messageID": "11111111",
+    "creationDateTime": "2015-06-05T00:00:00Z"
+  }
+}

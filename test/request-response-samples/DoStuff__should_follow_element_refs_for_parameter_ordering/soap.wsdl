@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ex="http://www.example.com/" xmlns:exds="http://www.example.com/wsdl/DoStuffService" targetNamespace="http://www.example.com/wsdl/DoStuffService" name="DoStuffService">
+  <types>
+    <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.example.com/" targetNamespace="http://www.example.com/" elementFormDefault="qualified" attributeFormDefault="unqualified" version="0.02">
+
+      <xsd:complexType name="DoStuffRequestType">
+        <xsd:sequence>
+          <xsd:element ref="DoStuffChores" />
+        </xsd:sequence>
+        <xsd:attributeGroup ref="CommonAttributeGroup" />
+      </xsd:complexType>
+
+      <xsd:complexType name="DoStuffResponseType">
+        <xsd:sequence />
+        <xsd:attributeGroup ref="CommonAttributeGroup" />
+      </xsd:complexType>
+
+      <xsd:element name="DoStuffRequest" type="DoStuffRequestType" />
+
+      <xsd:element name="DoStuffResponse" type="DoStuffResponseType" />
+
+      <xsd:complexType name="DoStuffTodoListType">
+        <xsd:sequence>
+          <xsd:element name="errorMessage" type="xsd:string" minOccurs="0" />
+          <xsd:element name="laundry" type="StringType" minOccurs="0" />
+          <xsd:element name="mowLawn" type="StringType" minOccurs="0" />
+          <xsd:element name="cleanGutters" type="StringType" minOccurs="0" />
+          <xsd:element name="sweepPatio" type="StringType" minOccurs="0" />
+          <xsd:element name="vacuumFloors" type="StringType" minOccurs="0" />
+          <xsd:element name="dust" type="StringType" minOccurs="0" />
+          <xsd:element name="mopFloors" type="StringType" minOccurs="0" />
+          <xsd:element name="changeAirFilter" type="StringType" minOccurs="0" />
+          <xsd:element name="completionStatus" type="FavoriteWithMaxValueType" minOccurs="0" />
+          <xsd:element name="previousStatus" type="BooleanTypeExtended" minOccurs="0" />
+        </xsd:sequence>
+        <xsd:attributeGroup ref="ObjectAttributeGroup" />
+      </xsd:complexType>
+
+      <xsd:complexType name="DoStuffChoresType">
+        <xsd:sequence>
+          <xsd:element name="DoStuffTodoList" type="DoStuffTodoListType" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:element name="DoStuffChores" type="DoStuffChoresType" />
+
+      <xsd:simpleType name="CrudType">
+        <xsd:restriction base="xsd:token">
+          <xsd:enumeration value="Create" />
+          <xsd:enumeration value="Read" />
+          <xsd:enumeration value="Update" />
+          <xsd:enumeration value="Delete" />
+        </xsd:restriction>
+      </xsd:simpleType>
+
+      <xsd:simpleType name="FavoriteIndicatorType">
+        <xsd:restriction base="xsd:boolean">
+          <xsd:pattern value="1" />
+        </xsd:restriction>
+      </xsd:simpleType>
+
+      <xsd:simpleType name="BooleanType">
+        <xsd:restriction base="xsd:boolean">
+          <xsd:pattern value="0|1" />
+        </xsd:restriction>
+      </xsd:simpleType>
+
+      <xsd:simpleType name="ApplicationVersionType">
+        <xsd:restriction base="xsd:string" />
+      </xsd:simpleType>
+      <xsd:complexType name="StringType">
+        <xsd:simpleContent>
+          <xsd:extension base="xsd:string">
+            <xsd:attribute name="favorite" type="FavoriteIndicatorType" use="optional" />
+          </xsd:extension>
+        </xsd:simpleContent>
+      </xsd:complexType>
+
+      <xsd:complexType name="BooleanTypeExtended">
+        <xsd:simpleContent>
+          <xsd:extension base="BooleanType">
+            <xsd:attribute name="favorite" type="FavoriteIndicatorType" use="optional" />
+          </xsd:extension>
+        </xsd:simpleContent>
+      </xsd:complexType>
+
+      <xsd:complexType name="FavoriteWithMaxValueType">
+        <xsd:simpleContent>
+          <xsd:extension base="xsd:string">
+            <xsd:attribute name="maxvalue" type="xsd:string" use="optional" />
+            <xsd:attribute name="favorite" type="FavoriteIndicatorType" use="optional" />
+          </xsd:extension>
+        </xsd:simpleContent>
+      </xsd:complexType>
+
+      <xsd:attributeGroup name="ObjectAttributeGroup">
+        <xsd:attribute name="action" type="CrudType" use="optional" />
+      </xsd:attributeGroup>
+      <xsd:attributeGroup name="CommonAttributeGroup">
+        <xsd:attribute name="creationDateTime" type="xsd:dateTime" use="optional" />
+        <xsd:attribute name="messageID" type="xsd:string" use="optional" />
+        <xsd:attribute name="appVersion" type="ApplicationVersionType" use="optional" />
+      </xsd:attributeGroup>
+
+    </xsd:schema>
+  </types>
+
+  <message name="DoStuffRequestMessage">
+    <part name="parameters" element="ex:DoStuffRequest" />
+  </message>
+  <message name="DoStuffResponseMessage">
+    <part name="parameters" element="ex:DoStuffResponse" />
+  </message>
+  <portType name="DoStuffServicePortType">
+    <operation name="DoStuff">
+      <input message="exds:DoStuffRequestMessage" />
+      <output message="exds:DoStuffResponseMessage" />
+    </operation>
+  </portType>
+  <binding name="DoStuffServiceSOAP11Binding" type="exds:DoStuffServicePortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="DoStuff">
+      <soap:operation soapAction="urn:processDocument" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <binding name="DoStuffServiceSOAP12Binding" type="exds:DoStuffServicePortType">
+    <soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="DoStuff">
+      <soap12:operation soapAction="urn:processDocument" style="document" />
+      <input>
+        <soap12:body use="literal" />
+      </input>
+      <output>
+        <soap12:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="DoStuffService">
+    <port name="DoStuffServiceSOAP11Port" binding="exds:DoStuffServiceSOAP11Binding">
+      <soap:address location="http://localhost:5000/DoStuffService.DoStuffServiceHttpSoap11Endpoint" />
+    </port>
+    <port name="DoStuffServiceSOAP12Port" binding="exds:DoStuffServiceSOAP12Binding">
+      <soap12:address location="http://localhost:5000/DoStuffService.DoStuffServiceHttpSoap12Endpoint" />
+    </port>
+  </service>
+</definitions>
